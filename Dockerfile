@@ -1,6 +1,6 @@
 #base image
-#FROM continuumio/anaconda3
-FROM python:3.8.8-slim-buster
+FROM continuumio/anaconda3
+#FROM python:latest
 
 COPY requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
