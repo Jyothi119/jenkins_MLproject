@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.image('continuumio/anaconda3').inside('-u root -v C:/ProgramData/Jenkins/.jenkins/workspace/kidneydisease -w /kidney_app') {
+                    docker.image('continuumio/anaconda3').inside('-u root') {
                         sh 'pip install -r requirements.txt'
                     }
                 }
@@ -16,7 +16,7 @@ pipeline {
         stage('Train') {
             steps {
                 script {
-                    docker.image('continuumio/anaconda3').inside('-u root -v C:/ProgramData/Jenkins/.jenkins/workspace/kidneydisease -w /kidney_app') {
+                    docker.image('continuumio/anaconda3').inside('-u root') {
                         sh 'python trainingML.ipynb'
                     }
                 }
