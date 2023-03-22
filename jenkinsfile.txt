@@ -1,20 +1,34 @@
 pipeline {
     agent any 
     options {
-            docker.image 'python:3.8.3'
-            docker.args '-u root'
-        
+        skipStagesAfterUnstable()
     }
     stages {
         stage('Build') {
             steps {
-                sh 'pip install -r requirements.txt'
+                script {
+                    docker {
+                        image 'python:3.8.3'
+                        args '-u root'
+                    }
+                    sh 'pip install -r requirements.txt'
+                }
             }
         }
         stage('Train') {
             steps {
-                sh 'python trainingML.py'
+                script {
+                    docker {
+                        image 'python:3.8.3'
+                        args '-u root'
+                    }
+                    sh 'python trainingML.py'
+                }
             }
         }  
     }
 }
+
+
+
+
