@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.image('python').inside('-u root -v C:/ProgramData/Jenkins/.jenkins/workspace/kidney_disease ML model') {
+                    docker.image('python').inside('-u root -v C:/ProgramData/Jenkins/.jenkins/workspace/kidney_disease ML model:/kidney_app') {
                         sh 'pip install -r requirements.txt'
                     }
                 }
@@ -16,7 +16,7 @@ pipeline {
         stage('Train') {
             steps {
                 script {
-                    docker.image('python').inside('-u root') {
+                    docker.image('python').inside('-u root -v C:/ProgramData/Jenkins/.jenkins/workspace/kidney_disease ML model:/kidney_app') {
                         sh 'python trainingML.py'
                     }
                 }
