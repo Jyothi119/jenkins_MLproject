@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('converting notebook file to python file') {
             steps {
-                bat "C:/Users/pudot/Anaconda3/Scripts/jupyter nbconvert --to script 'trainingML.ipynb'"
+                sh "C:/Users/pudot/Anaconda3/Scripts/jupyter nbconvert --to script 'trainingML.ipynb'"
                     }
         }
         stage('creating docker image') {
             steps {
-                bat "C:/Program Files/Docker/Docker/resources/bin/docker build -t python_image:$BUILD_NUMBER ."
+                sh "C:/Program Files/Docker/Docker/resources/bin/docker build -t python_image:$BUILD_NUMBER ."
             }
         }
         stage ('running script in docker container') {
             steps {
-                bat "C:/Program Files/Docker/Docker/resources/bin/docker run python_image:$BUILD_NUMBER"
+                sh "C:/Program Files/Docker/Docker/resources/bin/docker run python_image:$BUILD_NUMBER"
             }
         }
     }
