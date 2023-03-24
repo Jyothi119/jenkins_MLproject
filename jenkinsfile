@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('creating docker image') {
             steps {
-                bat "C:/Program Files/Docker/Docker/resources/bin/docker.exe build -t python_image:$BUILD_NUMBER ."
+                bat "\"C:/Program Files/Docker/Docker/resources/bin/docker.exe\" build -t python_image:$BUILD_NUMBER ."
             }
         }
         stage ('running script in docker container') {
             steps {
-                bat "C:/Program Files/Docker/Docker/resources/bin/docker.exe run python_image:$BUILD_NUMBER"
+                bat "\"C:/Program Files/Docker/Docker/resources/bin/docker.exe\" run python_image:$BUILD_NUMBER"
             }
         }
     }
