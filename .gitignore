@@ -1,0 +1,2 @@
+*.py
+# because we are converting .ipynb files to .py files
