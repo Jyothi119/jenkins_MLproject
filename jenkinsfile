@@ -1,11 +1,6 @@
 pipeline {
     agent any 
     stages {
-        stage('converting notebook file to python file') {
-            steps {
-                bat "C:/Users/pudot/Anaconda3/Scripts/jupyter nbconvert --to script 'trainingML.ipynb'"
-                    }
-        }
         stage('creating docker image') {
             steps {
                 bat "C:/Program Files/Docker/Docker/resources/bin/docker build -t python_image:$BUILD_NUMBER ."
