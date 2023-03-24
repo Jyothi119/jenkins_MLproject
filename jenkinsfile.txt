@@ -1,26 +1,21 @@
 pipeline {
     agent any 
-    options {
-        skipStagesAfterUnstable()
-    }
     stages {
-        stage('Build') {
+        stage('converting notebook file to python file') {
             steps {
-                script {
-                    docker.image('continuumio/anaconda3').inside('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\kidneydisease') {
-                        sh 'pip install -r requirements.txt'
+                sh "C:\Users\pudot\Anaconda3\Scripts\jupyter.exe nbconvert --to script 'trainingML.ipynb'"
                     }
-                }
+        }
+        stage('creating docker image') {
+            steps {
+                sh "C:\Program Files\Docker\Docker\resources\bin\docker.exe build -t python_image:$BUILD_NUMBER ."
             }
         }
-        stage('Train') {
+        stage ('running script in docker container') {
             steps {
-                script {
-                    docker.image('continuumio/anaconda3').inside('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\kidneydisease') {
-                        sh 'python trainingML.ipynb'
-                    }
-                }
+                sh "C:\Program Files\Docker\Docker\resources\bin\docker.exe run python_image:$BUILD_NUMBER"
             }
-        }  
+        }
     }
+      
 }
