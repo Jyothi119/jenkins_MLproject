@@ -1,6 +1,6 @@
 #base image
 #FROM continuumio/anaconda3
-FROM python:3.8.8-silm-buster
+FROM python:3.8.8
 WORKDIR /scripts
 
 COPY requirements.txt ./requirements.txt
